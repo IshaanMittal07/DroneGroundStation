@@ -2,8 +2,6 @@
 Telemtry worker that gathers GPS data.
 """
 
-import time
-
 import os
 import pathlib
 

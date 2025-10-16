@@ -30,21 +30,19 @@ CONNECTION_STRING = "tcp:localhost:12345"
 #                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
 # Set queue max sizes (<= 0 for infinity)
-HeartMax = 10
-TeleMax = 10
-ReportMax = 10
+HEART_MAX = 10
+TELE_MAX = 10
+REPORT_MAX = 10
 
 # Set worker counts
-HeartSendWorker = 1
-HeartRecWorker = 1
-TeleWorker = 1
-CmdWorker = 1
+HEART_SEND_WORKER = 1
+HEART_REC_WORKER = 1
+TELE_WORKER = 1
+CMD_WORKER = 1
 
 # Any other constants
 TARGET = command.Position(10, 20, 30)
-Runtime = 100
-
-
+RUNTIME = 100
 # =================================================================================================
 #                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
@@ -60,7 +58,6 @@ def main() -> int:
         print("ERROR: Failed to load configuration file")
         return -1
 
-    # Get Pylance to stop complaining
     assert config is not None
 
     # Setup main logger
@@ -69,86 +66,108 @@ def main() -> int:
         print("ERROR: Failed to create main logger")
         return -1
 
-    # Get Pylance to stop complaining
     assert main_logger is not None
 
-    # Create a connection to the drone. Assume that this is safe to pass around to all processes
-    # In reality, this will not work, but to simplify the bootamp, preetend it is allowed
-    # To test, you will run each of your workers individually to see if they work
-    # (test "drones" are provided for you test your workers)
-    # NOTE: If you want to have type annotations for the connection, it is of type mavutil.mavfile
+    # Connect to the drone
     connection = mavutil.mavlink_connection(CONNECTION_STRING)
-    connection.wait_heartbeat(timeout=30)  # Wait for the "drone" to connect
+    connection.wait_heartbeat(timeout=30)
 
     # =============================================================================================
     #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
-    # Create a worker controller
     controller = worker_controller.WorkerController()
 
-    # Create a multiprocess manager for synchronized queues
-    mpManage = mp.Manager()
+    mp_manager = mp.Manager()
 
-    # Create queues
-    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, HeartMax)
-    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, TeleMax)
-    report_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, ReportMax)
+    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, HEART_MAX)
+    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, TELE_MAX)
+    report_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, REPORT_MAX)
 
-    # Create worker properties for each worker type (what inputs it takes, how many workers)
-    # Heartbeat sender
+    # Worker properties
     heartbeat_sender_properties = worker_manager.WorkerProperties(
-        num=HeartSendWorker,
-        function=heartbeat_sender_worker.heartbeat_sender_worker,
-        arguments={
+        class_private_create_key=None,
+        controller=controller,
+        count=HEART_SEND_WORKER,
+        target=heartbeat_sender_worker.heartbeat_sender_worker,
+        work_arguments={
             "connection": connection,
             "controller": controller,
         },
+        input_queues=[],
+        output_queues=[],
     )
 
-    # Heartbeat receiver
     heartbeat_receiver_properties = worker_manager.WorkerProperties(
-        num=HeartRecdWorker,
-        function=heartbeat_receiver_worker.heartbeat_receiver_worker,
-        arguments={
+        class_private_create_key=None,
+        controller=controller,
+        count=HEART_REC_WORKER,
+        target=heartbeat_receiver_worker.heartbeat_receiver_worker,
+        work_arguments={
             "connection": connection,
             "heartbeat_queue": heartbeat_queue,
             "controller": controller,
         },
+        input_queues=[],
+        output_queues=[heartbeat_queue],
     )
 
-    # Telemetry
     telemetry_properties = worker_manager.WorkerProperties(
-        num=TeleWorker,
-        function=telemetry_worker.telemetry_worker,
-        arguments={
+        class_private_create_key=None,
+        controller=controller,
+        count=TELE_WORKER,
+        target=telemetry_worker.telemetry_worker,
+        work_arguments={
             "connection": connection,
-            "target": TARGET,
-            "telemetry_queue": telemtry_queue,
-            "report_queue": report_queue,
+            "telemetry_queue": telemetry_queue,
             "controller": controller,
         },
+        input_queues=[],
+        output_queues=[telemetry_queue],
     )
 
-    # Command
     command_properties = worker_manager.WorkerProperties(
-        num=CmdWorker,
-        function=command_worker.command_worker,
-        arguments={
+        class_private_create_key=None,
+        controller=controller,
+        count=CMD_WORKER,
+        target=command_worker.command_worker,
+        work_arguments={
             "connection": connection,
             "target": TARGET,
-            "telemetry_queue": telemtry_queue,
+            "telemetry_queue": telemetry_queue,
             "report_queue": report_queue,
             "controller": controller,
         },
+        input_queues=[telemetry_queue],
+        output_queues=[report_queue],
     )
 
-    # Create the workers (processes) and obtain their managers
-    heartbeat_sender_manager = worker_manager.WorkerManager(heartbeat_sender_properties)
-    heartbeat_receiver_manager = worker_manager.WorkerManager(heartbeat_receiver_properties)
-    telemetry_manager = worker_manager.WorkerManager(telemetry_properties)
-    command_manager = worker_manager.WorkerManager(command_properties)
+    # Create worker managers
+    heartbeat_sender_manager = worker_manager.WorkerManager(
+        class_private_create_key=None,
+        workers=heartbeat_sender_properties,
+        worker_properties=heartbeat_sender_properties,
+        local_logger=main_logger,
+    )
+    heartbeat_receiver_manager = worker_manager.WorkerManager(
+        class_private_create_key=None,
+        workers=heartbeat_receiver_properties,
+        worker_properties=heartbeat_receiver_properties,
+        local_logger=main_logger,
+    )
+    telemetry_manager = worker_manager.WorkerManager(
+        class_private_create_key=None,
+        workers=telemetry_properties,
+        worker_properties=telemetry_properties,
+        local_logger=main_logger,
+    )
+    command_manager = worker_manager.WorkerManager(
+        class_private_create_key=None,
+        workers=command_properties,
+        worker_properties=command_properties,
+        local_logger=main_logger,
+    )
 
-    # Start worker processes
+    # Start all workers
     heartbeat_sender_manager.start_workers()
     heartbeat_receiver_manager.start_workers()
     telemetry_manager.start_workers()
@@ -158,62 +177,52 @@ def main() -> int:
 
     # Main's work: read from all queues that output to main, and log any commands that we make
     # Continue running for 100 seconds or until the drone disconnects
-
     start_time = time.time()
-
-    while (time.time() - start_time) < Runtime:
-        # If drone disconnected, break early
+    while (time.time() - start_time) < RUNTIME:
         if not connection.port or connection.port.closed:
             main_logger.warning("Drone disconnected!", True)
             break
 
-        # Read from report queue (command worker outputs)
+        # Read from report queue
         try:
             if not report_queue.queue.empty():
                 report = report_queue.queue.get()
-                if report is not None:
+                if report:
                     main_logger.info(f"Command Report: {report}", True)
         except queue.Empty:
             pass
 
-        # Read heartbeat updates
+        # Read from heartbeat queue
         try:
             if not heartbeat_queue.queue.empty():
                 hb = heartbeat_queue.queue.get()
-                if hb is not None:
+                if hb:
                     main_logger.info(f"Received Heartbeat: {hb}", True)
         except queue.Empty:
             pass
 
         time.sleep(0.1)
 
-    # Stop the processes
+    # Stop all workers
     controller.request_exit()
-
     main_logger.info("Requested exit")
 
-    # Fill and drain queues from END TO START
+    # Drain queues
     report_queue.fill_and_drain_queue()
     telemetry_queue.fill_and_drain_queue()
     heartbeat_queue.fill_and_drain_queue()
-
     main_logger.info("Queues cleared")
 
-    # Clean up worker processes
+    # Join worker processes
     command_manager.join_workers()
     telemetry_manager.join_workers()
     heartbeat_receiver_manager.join_workers()
     heartbeat_sender_manager.join_workers()
 
     main_logger.info("Stopped")
-
-    # We can reset controller in case we want to reuse it
-    # Alternatively, create a new WorkerController instance
-
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================
-
     return 0
 
 

@@ -3,7 +3,6 @@ Test the telemetry worker with a mocked drone.
 """
 
 import time
-
 import multiprocessing as mp
 import subprocess
 import threading
@@ -50,33 +49,26 @@ def start_drone() -> None:
 # =================================================================================================
 def stop(
     controller: worker_controller.WorkerController,
-    telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,  # Place your own arguments here
-    # Add any necessary arguments
+    telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,
 ) -> None:
-
+    """Stop the workers."""
     controller.request_exit()
     telemetry_queue.fill_and_drain_queue()
-    """
-    Stop the workers.
-    """
-    # Add logic to stop your worker
 
 
 def read_queue(
-    telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,  # Place your own arguments here
-    controller: worker_controller.WorkerController,  # Add any necessary arguments
+    telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,
+    controller: worker_controller.WorkerController,
     main_logger: logger.Logger,
 ) -> None:
     """
     Read and print the output queue.
     """
-
     while not controller.is_exit_requested():
         if not telemetry_queue.queue.empty():
             telemetry_data = telemetry_queue.queue.get()
             main_logger.info(f"Received telemetry data: {telemetry_data}", True)
         time.sleep(0.1)
-    # Add logic to read from your worker's output queue and print it using the logger
 
 
 # =================================================================================================
@@ -128,10 +120,10 @@ def main() -> int:
     controller = worker_controller.WorkerController()
 
     # Create a multiprocess manager for synchronized queues
-    mpManage = mp.Manager()
+    mp_manage = mp.Manager()  # renamed to snake_case
 
     # Create your queues
-    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mpManage, 10)
+    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manage, 10)
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(

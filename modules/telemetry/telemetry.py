@@ -2,10 +2,7 @@
 Telemetry gathering logic.
 """
 
-import time
-
 from pymavlink import mavutil
-
 from ..common.modules.logger import logger
 
 
@@ -77,18 +74,15 @@ class Telemetry:
         cls,
         connection: mavutil.mavfile,
         local_logger: logger.Logger,
-    )-> tuple[bool, "Command"]:
+    ) -> tuple[bool, "Telemetry"]:
         """
         Falliable create (instantiation) method to create a Telemetry object.
         """
         try:
-            telemetry = Telemetry(
-                cls.__private_key, connection, local_logger
-            )  # Create a Telemetry object
+            telemetry = Telemetry(cls.__private_key, connection, local_logger)
             return True, telemetry
-
-        except Exception as e:
-            local_logger.error(f"Error creating Telemtery: {e}", True)
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            local_logger.error(f"Error creating Telemetry: {e}", True)
             return False, None
 
     def __init__(
@@ -98,52 +92,46 @@ class Telemetry:
         local_logger: logger.Logger,
     ) -> None:
         assert key is Telemetry.__private_key, "Use create() method"
-
-        # Do any intializiation here
         self.connection = connection
         self.local_logger = local_logger
 
-    def run(self) -> str:
+    def run(self) -> tuple[bool, TelemetryData | None]:
         """
         Receive LOCAL_POSITION_NED and ATTITUDE messages from the drone,
         combining them together to form a single TelemetryData object.
         """
         try:
-            msgLoc = self.connection.recv_match(
+            msg_loc = self.connection.recv_match(
                 type="LOCAL_POSITION_NED", blocking=True, timeout=1.0
-            )  # Read MAVLink message LOCAL_POSITION_NED (32)
-            msgAtt = self.connection.recv_match(
+            )
+            msg_att = self.connection.recv_match(
                 type="ATTITUDE", blocking=True, timeout=1.0
-            )  # Read MAVLink message ATTITUDE (30)
+            )
 
-            # check if both were recevived
-            if not msgLoc or not msgAtt:
+            if not msg_loc or not msg_att:
                 self.local_logger.warning(
                     "Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout."
                 )
                 return False, None
 
-            # extract attitude data
-            roll = msgAtt.roll
-            pitch = msgAtt.pitch
-            yaw = msgAtt.yaw
-            roll_speed = msgAtt.rollspeed
-            pitch_speed = msgAtt.pitchspeed
-            yaw_speed = msgAtt.yawspeed
-            time_att = getattr(msgAtt, "time_boot_ms", 0) / 1000.0  # convert ms to seconds
+            roll = msg_att.roll
+            pitch = msg_att.pitch
+            yaw = msg_att.yaw
+            roll_speed = msg_att.rollspeed
+            pitch_speed = msg_att.pitchspeed
+            yaw_speed = msg_att.yawspeed
+            time_att = getattr(msg_att, "time_boot_ms", 0) / 1000.0
 
-            # Extract position data
-            x = msgLoc.x
-            y = msgLoc.y
-            z = msgLoc.z
-            x_velocity = msgLoc.vx
-            y_velocity = msgLoc.vy
-            z_velocity = msgLoc.vz
-            time_loc = getattr(msgLoc, "time_boot_ms", 0) / 1000.0
+            x = msg_loc.x
+            y = msg_loc.y
+            z = msg_loc.z
+            x_velocity = msg_loc.vx
+            y_velocity = msg_loc.vy
+            z_velocity = msg_loc.vz
+            time_loc = getattr(msg_loc, "time_boot_ms", 0) / 1000.0
 
             latest_time = max(time_att, time_loc)
 
-            # Combine into one Telemtery Data object
             telemetry_data = TelemetryData(
                 time_since_boot=latest_time,
                 x=x,
@@ -160,15 +148,12 @@ class Telemetry:
                 yaw_speed=yaw_speed,
             )
 
-            self.local_logger.info(f"TelemetryDat created: {telemetry_data}")
-
+            self.local_logger.info(f"TelemetryData created: {telemetry_data}")
             return True, telemetry_data
 
-        except Exception as e:
+        except Exception as e:  # pylint: disable=broad-exception-caught
             self.local_logger.error(f"Error in Telemetry.run(): {e}", True)
             return False, None
-
-        # Return the most recent of both, and use the most recent message's timestamp
 
 
 # =================================================================================================

@@ -23,7 +23,6 @@ from utilities.workers import worker_controller
 MOCK_DRONE_MODULE = "tests.integration.mock_drones.command_drone"
 CONNECTION_STRING = "tcp:localhost:12345"
 
-# Please do not modify these, these are for the test cases (but do take note of them!)
 TELEMETRY_PERIOD = 0.5
 TARGET = command.Position(10, 20, 30)
 HEIGHT_TOLERANCE = 0.5
@@ -31,18 +30,10 @@ Z_SPEED = 1  # m/s
 ANGLE_TOLERANCE = 5  # deg
 TURNING_SPEED = 5  # deg/s
 
+
 # =================================================================================================
 #                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
-# Add your own constants here
-
-# =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-# =================================================================================================
-
-
-# Same utility functions across all the integration tests
-# pylint: disable=duplicate-code
 def start_drone() -> None:
     """
     Start the mocked drone.
@@ -50,43 +41,37 @@ def start_drone() -> None:
     subprocess.run(["python", "-m", MOCK_DRONE_MODULE], shell=True, check=False)
 
 
-# =================================================================================================
-#                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-# =================================================================================================
 def stop(
     telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,
     report_queue: queue_proxy_wrapper.QueueProxyWrapper,
-    controller: worker_controller.WorkerController,  # Add any necessary arguments
+    controller: worker_controller.WorkerController,
 ) -> None:
     """
     Stop the workers.
     """
     telemetry_queue.fill_and_drain_queue()
     report_queue.fill_and_drain_queue()
-    controller.request_exit()  # Add logic to stop your worker
+    controller.request_exit()
 
 
 def read_queue(
     report_queue: queue_proxy_wrapper.QueueProxyWrapper,
     controller: worker_controller.WorkerController,
-    main_logger: logger.Logger,
+    _main_logger: logger.Logger,  # renamed to _main_logger to mark unused
 ) -> None:
-
-    while not controller.is_exit_requested():
-        if not report_queue.queue.empty():
-            report_queue.queue.get()
-    time.sleep(0.1)
-
     """
     Read and print the output queue.
     """
-    # Add logic to read from your worker's output queue and print it using the logger
+    while not controller.is_exit_requested():
+        if not report_queue.queue.empty():
+            report_queue.queue.get()
+        time.sleep(0.1)
 
 
 def put_queue(
     telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,
     controller: worker_controller.WorkerController,
-    path: list,  # Add any necessary arguments
+    path: list,
 ) -> None:
     """
     Place mocked inputs into the input queue periodically with period TELEMETRY_PERIOD.
@@ -94,47 +79,29 @@ def put_queue(
     for telemetry_data in path:
         if controller.is_exit_requested():
             break
-
         if telemetry_data is None:
             print("WARNING: Test tried to queue None telemetry data!")
             continue
-
         telemetry_queue.queue.put(telemetry_data)
         time.sleep(TELEMETRY_PERIOD)
-
-    # Add logic to place the mocked inputs into your worker's input queue periodically
-
-
-# =================================================================================================
-#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-# =================================================================================================
 
 
 def main() -> int:
     """
     Start the command worker simulation.
     """
-    # Configuration settings
     result, config = read_yaml.open_config(logger.CONFIG_FILE_PATH)
     if not result:
         print("ERROR: Failed to load configuration file")
         return -1
 
-    # Get Pylance to stop complaining
     assert config is not None
-
-    # Setup main logger
     result, main_logger, _ = logger_main_setup.setup_main_logger(config)
     if not result:
         print("ERROR: Failed to create main logger")
         return -1
-
-    # Get Pylance to stop complaining
     assert main_logger is not None
 
-    # Mocked GCS, connect to mocked drone which is listening at CONNECTION_STRING
-    # source_system = 255 (groundside)
-    # source_component = 0 (ground control station)
     connection = mavutil.mavlink_connection(CONNECTION_STRING)
     connection.mav.heartbeat_send(
         mavutil.mavlink.MAV_TYPE_GCS,
@@ -144,25 +111,14 @@ def main() -> int:
         0,
     )
     main_logger.info("Connected!")
-    # pylint: enable=duplicate-code
 
-    # =============================================================================================
-    #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
-    # =============================================================================================
-    # Mock starting a worker, since cannot actually start a new process
-    # Create a worker controller for your worker
     controller = worker_controller.WorkerController()
+    mp_manage = mp.Manager()  # renamed to snake_case (was mpManage)
 
-    # Create a multiprocess manager for synchronized queues
-    mpManage = mp.Manager()
+    report_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manage, 10)
+    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manage, 10)
 
-    # Create your queues
-    report_queue = queue_proxy_wrapper.QueueProxyWrapper(mpManage, 10)
-    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mpManage, 10)
-
-    # Test cases, DO NOT EDIT!
     path = [
-        # Test singular points
         telemetry.TelemetryData(x=0, y=0, z=29, yaw=0, x_velocity=0, y_velocity=0, z_velocity=4),
         telemetry.TelemetryData(x=0, y=0, z=31, yaw=0, x_velocity=0, y_velocity=0, z_velocity=-2),
         telemetry.TelemetryData(
@@ -176,11 +132,10 @@ def main() -> int:
         ),
         telemetry.TelemetryData(
             x=0, y=0, z=30, yaw=1.142055302833977, x_velocity=0, y_velocity=0, z_velocity=0
-        ),  # +2 degrees
+        ),
         telemetry.TelemetryData(
             x=0, y=0, z=30, yaw=1.072242132754204, x_velocity=0, y_velocity=0, z_velocity=0
-        ),  # -2 degrees
-        # Fly a 30x30 square counter-clockwise
+        ),
         telemetry.TelemetryData(x=0, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0),
         telemetry.TelemetryData(x=10, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0),
         telemetry.TelemetryData(x=20, y=0, z=30, yaw=0, x_velocity=0, y_velocity=20, z_velocity=0),
@@ -211,7 +166,6 @@ def main() -> int:
         telemetry.TelemetryData(
             x=0, y=10, z=30, yaw=-math.pi / 2, x_velocity=-20, y_velocity=0, z_velocity=0
         ),
-        # Fly 30x30 square clockwise
         telemetry.TelemetryData(
             x=0, y=0, z=30, yaw=math.pi / 2, x_velocity=0, y_velocity=20, z_velocity=0
         ),
@@ -244,34 +198,20 @@ def main() -> int:
         ),
     ]
 
-    # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(
         TELEMETRY_PERIOD * len(path), stop, (telemetry_queue, report_queue, controller)
     ).start()
-
-    # Put items into input queue
     threading.Thread(target=put_queue, args=(telemetry_queue, controller, path)).start()
-
-    # Read the main queue (worker outputs)
     threading.Thread(target=read_queue, args=(report_queue, controller, main_logger)).start()
 
-    command_worker.command_worker(
-        connection,
-        TARGET,
-        telemetry_queue,
-        report_queue,
-        controller,
-        # Place your own arguments here
-    )
-    # =============================================================================================
-    #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
-    # =============================================================================================
-
+    command_worker.command_worker(connection, TARGET, telemetry_queue, report_queue, controller)
     return 0
+# =================================================================================================
+#                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
+# =================================================================================================
 
 
 if __name__ == "__main__":
-    # Start drone in another process
     drone_process = mp.Process(target=start_drone)
     drone_process.start()
 

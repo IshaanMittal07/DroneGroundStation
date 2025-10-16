@@ -5,6 +5,7 @@ Test the heartbeat reciever worker with a mocked drone.
 import multiprocessing as mp
 import subprocess
 import threading
+import time  # added import to fix undefined variable 'time'
 
 from pymavlink import mavutil
 
@@ -125,10 +126,10 @@ def main() -> int:
     controller = worker_controller.WorkerController()
 
     # Create a multiprocess manager for synchronized queues
-    mpManage = mp.Manager()
+    mp_manage = mp.Manager()  # renamed to snake_case (was mpManage)
 
     # Create your queues
-    report_queue = queue_proxy_wrapper.QueueProxyWrapper(mpManage, 10)
+    report_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manage, 10)
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(
