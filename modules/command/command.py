@@ -33,12 +33,14 @@ class Command:  # pylint: disable=too-many-instance-attributes
     def create(
         cls,
         connection: mavutil.mavfile,
-        #target: Position, DONE BC OF PYLINT
+        # target: Position, DONE BC OF PYLINT
         local_logger: logger.Logger,
     ) -> tuple[bool, "Command"]:
         """Fallible create (instantiation) method to create a Command object."""
         try:
-            command = Command(cls.__private_key, connection, local_logger)  #removed target before local_logger due to pylint issues
+            command = Command(
+                cls.__private_key, connection, local_logger
+            )  # removed target before local_logger due to pylint issues
             return True, command
         except Exception as e:  # pylint: disable=broad-exception-caught
             local_logger.error(f"Error creating Command: {e}", True)
@@ -48,7 +50,7 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self,
         key: object,
         connection: mavutil.mavfile,
-        #target: Position, DONE BC OF PYLINT
+        # target: Position, DONE BC OF PYLINT
         local_logger: logger.Logger,
     ) -> None:
         assert key is Command.__private_key, "Use create() method"

@@ -12,6 +12,7 @@ from utilities.workers import worker_controller
 from ..common.modules.logger import logger
 from . import command
 
+
 # =================================================================================================
 #                            ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
 # =================================================================================================
@@ -45,7 +46,9 @@ def command_worker(
     #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
 
-    result, cmd = command.Command.create(connection, local_logger) #removed target before local_logger due to pylint issues 
+    result, cmd = command.Command.create(
+        connection, local_logger
+    )  # removed target before local_logger due to pylint issues
     if not result or cmd is None:
         local_logger.error("Failed to create Command", True)
         return
@@ -69,6 +72,7 @@ def command_worker(
             time.sleep(0.01)
 
     local_logger.info("Command worker exiting", True)
+
 
 # =================================================================================================
 #                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑

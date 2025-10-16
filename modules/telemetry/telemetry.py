@@ -104,9 +104,7 @@ class Telemetry:
             msg_loc = self.connection.recv_match(
                 type="LOCAL_POSITION_NED", blocking=True, timeout=1.0
             )
-            msg_att = self.connection.recv_match(
-                type="ATTITUDE", blocking=True, timeout=1.0
-            )
+            msg_att = self.connection.recv_match(type="ATTITUDE", blocking=True, timeout=1.0)
 
             if not msg_loc or not msg_att:
                 self.local_logger.warning(

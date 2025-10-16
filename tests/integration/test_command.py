@@ -206,6 +206,8 @@ def main() -> int:
 
     command_worker.command_worker(connection, TARGET, telemetry_queue, report_queue, controller)
     return 0
+
+
 # =================================================================================================
 #                            ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
 # =================================================================================================
