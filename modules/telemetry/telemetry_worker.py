@@ -1,6 +1,7 @@
 """
 Telemtry worker that gathers GPS data.
 """
+import time
 
 import os
 import pathlib
@@ -18,13 +19,15 @@ from ..common.modules.logger import logger
 # =================================================================================================
 def telemetry_worker(
     connection: mavutil.mavfile,
-    args,  # Place your own arguments here
-    # Add other necessary worker arguments here
+    telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,  # Place your own arguments here
+    controller: worker_controller.WorkerController,
+# Add other necessary worker arguments here
 ) -> None:
     """
     Worker process.
 
     args... describe what the arguments are
+    
     """
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -47,6 +50,29 @@ def telemetry_worker(
     #                          ↓ BOOTCAMPERS MODIFY BELOW THIS COMMENT ↓
     # =============================================================================================
     # Instantiate class object (telemetry.Telemetry)
+
+    result, tele = telemetry.Telemetry.create(connection, local_logger)
+    if not result:
+        local_logger.error("Failed to create Telemetry", True)
+        return
+
+    local_logger.info("Telemetry Created YAY!", True)
+
+    while not controller.is_exit_requested():
+        controller.check_pause()
+        result, telemetry_data = tele.run()
+
+        # Defensive checks and diagnostics
+        if telemetry_data is None:
+            local_logger.error("Attempting to enqueue None telemetry_data! Skipping.", True)
+            continue
+
+        if result and isinstance(telemetry_data, telemetry.TelemetryData):
+            telemetry_queue.queue.put(telemetry_data)
+            local_logger.info(f"Sent telemetry data: {telemetry_data}", True)
+        else:
+            local_logger.warning("Telemetry timeout or invalid data, skipping.", True)
+
 
     # Main loop: do work.
 

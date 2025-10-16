@@ -1,0 +1,13 @@
+18:41:18: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | main | 42] Logger initialized
+18:41:18: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:19: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:20: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:21: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:22: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:31: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:32: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:33: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:34: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:35: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:37: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | send_heartbeats | 59] Drone: Sent a heartbeat
+18:41:38: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\mock_drones\heartbeat_receiver_drone.py | main | 79] Passesd!

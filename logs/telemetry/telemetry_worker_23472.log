@@ -1,0 +1,580 @@
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 47] Logger initialized
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 59] Telemetry Created YAY!
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 0.334,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 0.334,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 0.666,
+            x: 0.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 0.666,
+            x: 0.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 1.333,
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 1.333,
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 1.667,
+            x: 1.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 1.667,
+            x: 1.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:07: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 2.333,
+            x: 2.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:07: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 2.333,
+            x: 2.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:07: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 2.668,
+            x: 2.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:07: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 2.668,
+            x: 2.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 3.334,
+            x: 3.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 3.334,
+            x: 3.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 3.667,
+            x: 3.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 3.667,
+            x: 3.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 4.334,
+            x: 4.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 4.334,
+            x: 4.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.0471975803375244,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 4.666,
+            x: 4.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 4.666,
+            x: 4.5,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 2.094395160675049,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:11: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 117] Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout.
+20:03:11: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 69] Telemetry timeout, restarting
+20:03:13: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 117] Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout.
+20:03:13: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 69] Telemetry timeout, restarting
+20:03:13: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 0.5,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:13: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 0.5,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:14: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 1.0,
+            x: 0.6666666865348816,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:14: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 1.0,
+            x: 0.6666666865348816,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:14: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 1.5,
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:14: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 1.5,
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:15: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 2.0,
+            x: 1.6666666269302368,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:15: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 2.0,
+            x: 1.6666666269302368,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:15: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 2.5,
+            x: 2.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:15: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 2.5,
+            x: 2.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 3.0,
+            x: 2.6666667461395264,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 3.0,
+            x: 2.6666667461395264,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 3.1415927410125732,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 3.5,
+            x: 3.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 3.5,
+            x: 3.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: -1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 4.0,
+            x: 3.6666667461395264,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 4.0,
+            x: 3.6666667461395264,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 158] TelemetryDat created: {
+            time_since_boot: 4.5,
+            x: 4.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 67] Sent telemetry data: {
+            time_since_boot: 4.5,
+            x: 4.0,
+            y: 0.0,
+            z: 0.0,
+            x_velocity: 1.0,
+            y_velocity: 0.0,
+            z_velocity: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 1.5707963705062866,
+            roll_speed: 0.0,
+            pitch_speed: 0.0,
+            yaw_speed: 3.1415927410125732
+        }
+20:03:18: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 117] Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout.
+20:03:18: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 69] Telemetry timeout, restarting
+20:03:20: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | run | 117] Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout.
+20:03:20: [WARNING] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 69] Telemetry timeout, restarting
