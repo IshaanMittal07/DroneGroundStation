@@ -87,18 +87,18 @@ def main() -> int:
     controller = worker_controller.WorkerController()
 
     # Create a multiprocess manager for synchronized queues
-    mpManage = mp.Manager() 
+    mpManage = mp.Manager()
 
     # Create queues
     heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, HeartMax)
     telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, TeleMax)
     report_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, ReportMax)
-    
+
     # Create worker properties for each worker type (what inputs it takes, how many workers)
     # Heartbeat sender
     heartbeat_sender_properties = worker_manager.WorkerProperties(
-        num = HeartSendWorker,
-        function = heartbeat_sender_worker.heartbeat_sender_worker,
+        num=HeartSendWorker,
+        function=heartbeat_sender_worker.heartbeat_sender_worker,
         arguments={
             "connection": connection,
             "controller": controller,
@@ -107,41 +107,40 @@ def main() -> int:
 
     # Heartbeat receiver
     heartbeat_receiver_properties = worker_manager.WorkerProperties(
-        num = HeartRecdWorker,
-        function = heartbeat_receiver_worker.heartbeat_receiver_worker,
+        num=HeartRecdWorker,
+        function=heartbeat_receiver_worker.heartbeat_receiver_worker,
         arguments={
             "connection": connection,
-            "heartbeat_queue": heartbeat_queue
+            "heartbeat_queue": heartbeat_queue,
             "controller": controller,
         },
     )
 
     # Telemetry
     telemetry_properties = worker_manager.WorkerProperties(
-        num = TeleWorker,
-        function = telemetry_worker.telemetry_worker,
+        num=TeleWorker,
+        function=telemetry_worker.telemetry_worker,
         arguments={
             "connection": connection,
             "target": TARGET,
             "telemetry_queue": telemtry_queue,
-            "report_queue": report_queue, 
+            "report_queue": report_queue,
             "controller": controller,
         },
     )
 
     # Command
     command_properties = worker_manager.WorkerProperties(
-        num = CmdWorker,
-        function = command_worker.command_worker,
+        num=CmdWorker,
+        function=command_worker.command_worker,
         arguments={
             "connection": connection,
             "target": TARGET,
             "telemetry_queue": telemtry_queue,
-            "report_queue": report_queue, 
+            "report_queue": report_queue,
             "controller": controller,
         },
     )
-    
 
     # Create the workers (processes) and obtain their managers
     heartbeat_sender_manager = worker_manager.WorkerManager(heartbeat_sender_properties)
@@ -154,7 +153,6 @@ def main() -> int:
     heartbeat_receiver_manager.start_workers()
     telemetry_manager.start_workers()
     command_manager.start_workers()
-    
 
     main_logger.info("Started")
 
@@ -178,7 +176,7 @@ def main() -> int:
         except queue.Empty:
             pass
 
-        #Read heartbeat updates
+        # Read heartbeat updates
         try:
             if not heartbeat_queue.queue.empty():
                 hb = heartbeat_queue.queue.get()
@@ -198,7 +196,6 @@ def main() -> int:
     report_queue.fill_and_drain_queue()
     telemetry_queue.fill_and_drain_queue()
     heartbeat_queue.fill_and_drain_queue()
-
 
     main_logger.info("Queues cleared")
 

@@ -51,7 +51,9 @@ def stop(
     Stop the workers.
     """
     controller.request_exit()
- # Add logic to stop your worker
+
+
+# Add logic to stop your worker
 
 
 # =================================================================================================
@@ -97,15 +99,14 @@ def main() -> int:
 
     controller = worker_controller.WorkerController()
 
-
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(HEARTBEAT_PERIOD * NUM_TRIALS, stop, (controller,)).start()
 
     heartbeat_sender_worker.heartbeat_sender_worker(
         connection,
         controller,
-    )       # Place your own arguments here
-    
+    )  # Place your own arguments here
+
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
     # =============================================================================================

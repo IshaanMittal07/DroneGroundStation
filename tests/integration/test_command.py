@@ -76,11 +76,11 @@ def read_queue(
         if not report_queue.queue.empty():
             report_queue.queue.get()
     time.sleep(0.1)
-        
+
     """
     Read and print the output queue.
     """
-      # Add logic to read from your worker's output queue and print it using the logger
+    # Add logic to read from your worker's output queue and print it using the logger
 
 
 def put_queue(
@@ -101,8 +101,8 @@ def put_queue(
 
         telemetry_queue.queue.put(telemetry_data)
         time.sleep(TELEMETRY_PERIOD)
-        
-      # Add logic to place the mocked inputs into your worker's input queue periodically
+
+    # Add logic to place the mocked inputs into your worker's input queue periodically
 
 
 # =================================================================================================
@@ -154,8 +154,7 @@ def main() -> int:
     controller = worker_controller.WorkerController()
 
     # Create a multiprocess manager for synchronized queues
-    mpManage = mp.Manager() 
-
+    mpManage = mp.Manager()
 
     # Create your queues
     report_queue = queue_proxy_wrapper.QueueProxyWrapper(mpManage, 10)
@@ -246,7 +245,9 @@ def main() -> int:
     ]
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
-    threading.Timer(TELEMETRY_PERIOD * len(path), stop, (telemetry_queue, report_queue, controller)).start()
+    threading.Timer(
+        TELEMETRY_PERIOD * len(path), stop, (telemetry_queue, report_queue, controller)
+    ).start()
 
     # Put items into input queue
     threading.Thread(target=put_queue, args=(telemetry_queue, controller, path)).start()
@@ -254,7 +255,12 @@ def main() -> int:
     # Read the main queue (worker outputs)
     threading.Thread(target=read_queue, args=(report_queue, controller, main_logger)).start()
 
-    command_worker.command_worker(connection, TARGET, telemetry_queue, report_queue, controller, 
+    command_worker.command_worker(
+        connection,
+        TARGET,
+        telemetry_queue,
+        report_queue,
+        controller,
         # Place your own arguments here
     )
     # =============================================================================================

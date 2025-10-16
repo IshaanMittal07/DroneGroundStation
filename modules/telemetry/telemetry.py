@@ -77,18 +77,19 @@ class Telemetry:
         cls,
         connection: mavutil.mavfile,
         local_logger: logger.Logger,
-    ):
+    )-> tuple[bool, "Command"]:
         """
         Falliable create (instantiation) method to create a Telemetry object.
         """
-        try: 
-            telemetry = Telemetry(cls.__private_key, connection, local_logger)  # Create a Telemetry object
+        try:
+            telemetry = Telemetry(
+                cls.__private_key, connection, local_logger
+            )  # Create a Telemetry object
             return True, telemetry
-        
+
         except Exception as e:
             local_logger.error(f"Error creating Telemtery: {e}", True)
             return False, None
-        
 
     def __init__(
         self,
@@ -101,33 +102,37 @@ class Telemetry:
         # Do any intializiation here
         self.connection = connection
         self.local_logger = local_logger
-        
 
-    def run(self) -> str: 
+    def run(self) -> str:
         """
         Receive LOCAL_POSITION_NED and ATTITUDE messages from the drone,
         combining them together to form a single TelemetryData object.
         """
-        try: 
-            msgLoc = self.connection.recv_match(type = 'LOCAL_POSITION_NED', blocking = True, timeout = 1.0)   # Read MAVLink message LOCAL_POSITION_NED (32)
-            msgAtt = self.connection.recv_match(type = 'ATTITUDE', blocking = True, timeout = 1.0) # Read MAVLink message ATTITUDE (30)
+        try:
+            msgLoc = self.connection.recv_match(
+                type="LOCAL_POSITION_NED", blocking=True, timeout=1.0
+            )  # Read MAVLink message LOCAL_POSITION_NED (32)
+            msgAtt = self.connection.recv_match(
+                type="ATTITUDE", blocking=True, timeout=1.0
+            )  # Read MAVLink message ATTITUDE (30)
 
-            #check if both were recevived 
+            # check if both were recevived
             if not msgLoc or not msgAtt:
-                self.local_logger.warning("Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout.")
+                self.local_logger.warning(
+                    "Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout."
+                )
                 return False, None
 
-            #extract attitude data
+            # extract attitude data
             roll = msgAtt.roll
             pitch = msgAtt.pitch
             yaw = msgAtt.yaw
             roll_speed = msgAtt.rollspeed
             pitch_speed = msgAtt.pitchspeed
             yaw_speed = msgAtt.yawspeed
-            time_att = getattr(msgAtt,
-                               "time_boot_ms", 0) / 1000.0 # convert ms to seconds
+            time_att = getattr(msgAtt, "time_boot_ms", 0) / 1000.0  # convert ms to seconds
 
-            #Extract position data
+            # Extract position data
             x = msgLoc.x
             y = msgLoc.y
             z = msgLoc.z
@@ -138,21 +143,21 @@ class Telemetry:
 
             latest_time = max(time_att, time_loc)
 
-            #Combine into one Telemtery Data object
+            # Combine into one Telemtery Data object
             telemetry_data = TelemetryData(
-                time_since_boot = latest_time,
+                time_since_boot=latest_time,
                 x=x,
                 y=y,
                 z=z,
-                x_velocity = x_velocity,
-                y_velocity = y_velocity,
-                z_velocity = z_velocity,
-                roll = roll,
-                pitch = pitch,
-                yaw = yaw, 
-                roll_speed = roll_speed,
-                pitch_speed = pitch_speed,
-                yaw_speed = yaw_speed,
+                x_velocity=x_velocity,
+                y_velocity=y_velocity,
+                z_velocity=z_velocity,
+                roll=roll,
+                pitch=pitch,
+                yaw=yaw,
+                roll_speed=roll_speed,
+                pitch_speed=pitch_speed,
+                yaw_speed=yaw_speed,
             )
 
             self.local_logger.info(f"TelemetryDat created: {telemetry_data}")
@@ -162,11 +167,8 @@ class Telemetry:
         except Exception as e:
             self.local_logger.error(f"Error in Telemetry.run(): {e}", True)
             return False, None
-    
-        
-        
+
         # Return the most recent of both, and use the most recent message's timestamp
-        
 
 
 # =================================================================================================

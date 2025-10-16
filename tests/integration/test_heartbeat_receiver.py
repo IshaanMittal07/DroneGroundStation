@@ -56,7 +56,7 @@ def stop(
     Stop the workers.
     """
     controller.request_exit()
-    report_queue.fill_and_drain_queue()  
+    report_queue.fill_and_drain_queue()
 
 
 def read_queue(
@@ -71,7 +71,9 @@ def read_queue(
         if not report_queue.queue.empty():
             status = report_queue.queue.get()
             main_logger.info(f"Worker status: {status}", True)
-        time.sleep(0.1)  # Add logic to read from your worker's output queue and print it using the logger
+        time.sleep(
+            0.1
+        )  # Add logic to read from your worker's output queue and print it using the logger
 
 
 # =================================================================================================
@@ -122,13 +124,11 @@ def main() -> int:
     # Create a worker controller for your worker
     controller = worker_controller.WorkerController()
 
-
     # Create a multiprocess manager for synchronized queues
-    mpManage = mp.Manager() 
+    mpManage = mp.Manager()
 
     # Create your queues
     report_queue = queue_proxy_wrapper.QueueProxyWrapper(mpManage, 10)
-
 
     # Just set a timer to stop the worker after a while, since the worker infinite loops
     threading.Timer(

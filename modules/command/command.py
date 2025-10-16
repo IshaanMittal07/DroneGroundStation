@@ -39,7 +39,7 @@ class Command:  # pylint: disable=too-many-instance-attributes
         connection: mavutil.mavfile,
         target: Position,
         local_logger: logger.Logger,
-    ):
+    )-> tuple[bool, "Command"]:
         """
         Falliable create (instantiation) method to create a Command object.
         """
@@ -70,14 +70,14 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self.velocity_sum = Position(0.0,0.0,0.0)
         self.sample_count = 0 
 
-    def set_target(self, target):
+    def set_target(self, target: "Position") -> None:
         """Sets the 3D target position for the drone to align to."""
         self.target = target
 
     def run(
         self,
         telemetry_data: telemetry.TelemetryData,  # Put your own arguments here
-    ):
+    )-> None:
 
         #To get the average velocity
         self.velocity_sum.x += telemetry_data.x_velocity or 0 #adding all the instatenous velocites x,y,z

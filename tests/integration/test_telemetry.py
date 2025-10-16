@@ -1,6 +1,7 @@
 """
 Test the telemetry worker with a mocked drone.
 """
+
 import time
 
 import multiprocessing as mp
@@ -50,11 +51,11 @@ def start_drone() -> None:
 def stop(
     controller: worker_controller.WorkerController,
     telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,  # Place your own arguments here
-      # Add any necessary arguments
+    # Add any necessary arguments
 ) -> None:
 
     controller.request_exit()
-    telemetry_queue.fill_and_drain_queue()  
+    telemetry_queue.fill_and_drain_queue()
     """
     Stop the workers.
     """
@@ -75,7 +76,7 @@ def read_queue(
             telemetry_data = telemetry_queue.queue.get()
             main_logger.info(f"Received telemetry data: {telemetry_data}", True)
         time.sleep(0.1)
-      # Add logic to read from your worker's output queue and print it using the logger
+    # Add logic to read from your worker's output queue and print it using the logger
 
 
 # =================================================================================================
@@ -125,7 +126,6 @@ def main() -> int:
     # Mock starting a worker, since cannot actually start a new process
     # Create a worker controller for your worker
     controller = worker_controller.WorkerController()
-
 
     # Create a multiprocess manager for synchronized queues
     mpManage = mp.Manager()

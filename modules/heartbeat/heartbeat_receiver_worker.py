@@ -59,13 +59,11 @@ def heartbeat_receiver_worker(
 
     while not controller.is_exit_requested():
         controller.check_pause()
-        status = receiver.run() # recall this will return the string that updates the status based
-        #on the num of heartbets missed or not
+        status = receiver.run()  # recall this will return the string that updates the status based
+        # on the num of heartbets missed or not
 
-        report_queue.queue.put(status)#update the queue with the status 
+        report_queue.queue.put(status)  # update the queue with the status
         local_logger.info(f"Status: {status}", True)
-    
-
 
 
 # =================================================================================================

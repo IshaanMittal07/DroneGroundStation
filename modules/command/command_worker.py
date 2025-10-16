@@ -1,6 +1,7 @@
 """
 Command worker to make decisions based on Telemetry Data.
 """
+
 import time
 import os
 import pathlib
@@ -11,8 +12,7 @@ from utilities.workers import queue_proxy_wrapper
 from utilities.workers import worker_controller
 from . import command
 from ..common.modules.logger import logger
-from modules.telemetry import telemetry  
-
+from modules.telemetry import telemetry
 
 
 # =================================================================================================
@@ -66,7 +66,6 @@ def command_worker(
         if not telemetry_queue.queue.empty():
             telemetry_data = telemetry_queue.queue.get()
 
-
             if telemetry_data is None:
                 continue
 
@@ -77,9 +76,7 @@ def command_worker(
         else:
             time.sleep(0.01)
 
-        
     local_logger.info("Command worker exiting", True)
-
 
     # Main loop: do work.
 

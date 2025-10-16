@@ -1,6 +1,7 @@
 """
 Telemtry worker that gathers GPS data.
 """
+
 import time
 
 import os
@@ -21,13 +22,13 @@ def telemetry_worker(
     connection: mavutil.mavfile,
     telemetry_queue: queue_proxy_wrapper.QueueProxyWrapper,  # Place your own arguments here
     controller: worker_controller.WorkerController,
-# Add other necessary worker arguments here
+    # Add other necessary worker arguments here
 ) -> None:
     """
     Worker process.
 
     args... describe what the arguments are
-    
+
     """
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
@@ -72,7 +73,6 @@ def telemetry_worker(
             local_logger.info(f"Sent telemetry data: {telemetry_data}", True)
         else:
             local_logger.warning("Telemetry timeout or invalid data, skipping.", True)
-
 
     # Main loop: do work.
 
