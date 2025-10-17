@@ -142,7 +142,7 @@ def main() -> int:
     )
 
     # Create worker managers
-    #UPDATE: ADDED .create() to each (Review) 
+    # UPDATE: ADDED .create() to each (Review)
     heartbeat_sender_manager = worker_manager.WorkerManager.create(
         class_private_create_key=None,
         workers=heartbeat_sender_properties,
@@ -185,7 +185,7 @@ def main() -> int:
             break
 
         # Read from report queue
-        #UPDATE: MADE INTO ONE TRY/CATCH (Review) 
+        # UPDATE: MADE INTO ONE TRY/CATCH (Review)
         try:
             if not report_queue.queue.empty():
                 report = report_queue.queue.get()
@@ -207,7 +207,7 @@ def main() -> int:
     main_logger.info("Requested exit")
 
     # Drain queues
-    #UPDATE: CHANGED ORDER (Review) 
+    # UPDATE: CHANGED ORDER (Review)
     heartbeat_queue.fill_and_drain_queue()
     telemetry_queue.fill_and_drain_queue()
     report_queue.fill_and_drain_queue()

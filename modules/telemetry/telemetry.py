@@ -96,14 +96,14 @@ class Telemetry:
         assert key is Telemetry.__private_key, "Use create() method"
         self.connection = connection
         self.local_logger = local_logger
-        
+
     def run(self) -> tuple[bool, TelemetryData | None]:
         """
         Receive LOCAL_POSITION_NED and ATTITUDE messages from the drone,
         combining them together to form a single TelemetryData object.
         """
 
-        #Implemented check to get both LOCAL_POSITION_NED AND ATTITUDE within 1 second (Review) 
+        # Implemented check to get both LOCAL_POSITION_NED AND ATTITUDE within 1 second (Review)
         try:
             start_time = time.time()
             msg_loc = msg_att = None
@@ -111,13 +111,9 @@ class Telemetry:
             # Keep trying until both messages are received or 1 second passes
             while time.time() - start_time < 1.0:
                 if not msg_loc:
-                    msg_loc = self.connection.recv_match(
-                        type="LOCAL_POSITION_NED", blocking=False
-                    )
+                    msg_loc = self.connection.recv_match(type="LOCAL_POSITION_NED", blocking=False)
                 if not msg_att:
-                    msg_att = self.connection.recv_match(
-                        type="ATTITUDE", blocking=False
-                    )
+                    msg_att = self.connection.recv_match(type="ATTITUDE", blocking=False)
                 if msg_loc and msg_att:
                     break
                 time.sleep(0.01)
@@ -143,9 +139,9 @@ class Telemetry:
             y_velocity = msg_loc.vy
             z_velocity = msg_loc.vz
 
-            time_att = getattr(msg_att, "time_boot_ms", 0) #Removed Division (Review) 
-            time_loc = getattr(msg_loc, "time_boot_ms", 0) #Removed Division (Review)
-            latest_time = max(time_att, time_loc) #Fixed time_since_boot increment issue (Review)   
+            time_att = getattr(msg_att, "time_boot_ms", 0)  # Removed Division (Review)
+            time_loc = getattr(msg_loc, "time_boot_ms", 0)  # Removed Division (Review)
+            latest_time = max(time_att, time_loc)  # Fixed time_since_boot increment issue (Review)
 
             telemetry_data = TelemetryData(
                 time_since_boot=latest_time,

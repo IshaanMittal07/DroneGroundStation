@@ -55,6 +55,8 @@ def heartbeat_receiver_worker(
         local_logger.error("Failed to create HeartbeatReceiver", True)
         return
 
+    assert receiver is not None
+
     local_logger.info("HeartBeatReceiver Created YAY!", True)
 
     while not controller.is_exit_requested():

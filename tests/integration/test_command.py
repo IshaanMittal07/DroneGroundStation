@@ -57,7 +57,7 @@ def stop(
 def read_queue(
     report_queue: queue_proxy_wrapper.QueueProxyWrapper,
     controller: worker_controller.WorkerController,
-    _main_logger: logger.Logger,  # renamed to _main_logger to mark unused
+    main_logger: logger.Logger,  # renamed to _main_logger to mark unused
 ) -> None:
     """
     Read and print the output queue.
@@ -66,7 +66,8 @@ def read_queue(
         if not report_queue.queue.empty():
             report = report_queue.queue.get()
             if report:
-                main_logger.info(f"Command Report: {report}", True) #added Logger (Review)
+                main_logger.info(f"Command Report: {report}", True)  # added Logger (Review)
+                # Above line also fixes logging error in which previously it did not log the change in yaw and change in altitude
         time.sleep(0.1)
 
 
@@ -78,11 +79,11 @@ def put_queue(
     """
     Place mocked inputs into the input queue periodically with period TELEMETRY_PERIOD.
     """
+
     for telemetry_data in path:
         if controller.is_exit_requested():
             break
         if telemetry_data is None:
-            local_logger.warning("WARNING: Test tried to queue None telemetry data!") #added Logger (Review) 
             continue
         telemetry_queue.queue.put(telemetry_data)
         time.sleep(TELEMETRY_PERIOD)
@@ -94,13 +95,12 @@ def main() -> int:
     """
     result, config = read_yaml.open_config(logger.CONFIG_FILE_PATH)
     if not result:
-        local_logger.error("ERROR: Failed to load configuration file") #added Logger (Review) 
         return -1
 
     assert config is not None
     result, main_logger, _ = logger_main_setup.setup_main_logger(config)
     if not result:
-        local_logger.error("ERROR: Failed to create main logger")#added Logger (Review) 
+        main_logger.error("ERROR: Failed to create main logger")  # added Logger (Review)
         return -1
     assert main_logger is not None
 

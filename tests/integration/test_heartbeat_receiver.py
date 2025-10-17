@@ -68,13 +68,12 @@ def read_queue(
     """
     Read and print the output queue.
     """
+    # Fixed log issue to show more connected and disconnected drone status logs in main.log (Review)
     while not controller.is_exit_requested():
         if not report_queue.queue.empty():
             status = report_queue.queue.get()
-            main_logger.info(f"Worker status: {status}", True)
-        time.sleep(
-            0.1
-        )  # Add logic to read from your worker's output queue and print it using the logger
+            main_logger.info(f"Drone status: {status}", True)
+        time.sleep(0.1)
 
 
 # =================================================================================================

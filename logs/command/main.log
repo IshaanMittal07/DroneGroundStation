@@ -1,0 +1,28 @@
+02:41:15: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
+02:41:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | main | 115] Connected!
+02:41:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE ALTITUDE: 1.00
+02:41:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE ALTITUDE: -1.00
+02:41:19: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 63.43
+02:41:20: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 90.00
+02:41:21: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 116.57
+02:41:21: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 45.00
+02:41:22: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 63.43
+02:41:22: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 90.00
+02:41:23: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 26.57
+02:41:23: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 45.00
+02:41:24: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 90.00
+02:41:24: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 45.00
+02:41:25: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 90.00
+02:41:25: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: 135.00
+02:41:25: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -26.57
+02:41:26: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -45.00
+02:41:26: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -90.00
+02:41:27: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -45.00
+02:41:28: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -90.00
+02:41:28: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -135.00
+02:41:29: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -63.43
+02:41:29: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -90.00
+02:41:30: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -116.57
+02:41:30: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -45.00
+02:41:31: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -63.43
+02:41:31: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_command.py | read_queue | 69] Command Report: CHANGE YAW: -90.00

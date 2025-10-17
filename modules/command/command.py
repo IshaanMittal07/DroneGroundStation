@@ -33,14 +33,14 @@ class Command:  # pylint: disable=too-many-instance-attributes
     def create(
         cls,
         connection: mavutil.mavfile,
-        # target: Position, DONE BC OF PYLINT
+        target: Position,
         local_logger: logger.Logger,
     ) -> tuple[bool, "Command"]:
         """Fallible create (instantiation) method to create a Command object."""
         try:
             command = Command(
-                cls.__private_key, connection, local_logger
-            )  # removed target before local_logger due to pylint issues
+                cls.__private_key, connection, target, local_logger
+            )  # removed target before local_logger due to pylint issues -> FIXED TARGET IS BACK YAY!!!!! (Review)
             return True, command
         except Exception as e:  # pylint: disable=broad-exception-caught
             local_logger.error(f"Error creating Command: {e}", True)
@@ -50,13 +50,13 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self,
         key: object,
         connection: mavutil.mavfile,
-        # target: Position, DONE BC OF PYLINT
+        target: Position,
         local_logger: logger.Logger,
     ) -> None:
         assert key is Command.__private_key, "Use create() method"
 
         self.connection = connection
-        self.target = None
+        self.target = target
         self.local_logger = local_logger
 
         self.velocity_sum = Position(0.0, 0.0, 0.0)
@@ -83,7 +83,7 @@ class Command:  # pylint: disable=too-many-instance-attributes
         delta_z = self.target.z - telemetry_data.z
         if abs(delta_z) > 0.5:
             self.connection.mav.command_long_send(
-                1, #Hardcoded to 1 and 0 as per documentation (Review) 
+                1,  # Hardcoded to 1 and 0 as per documentation (Review)
                 0,
                 mavutil.mavlink.MAV_CMD_CONDITION_CHANGE_ALT,
                 0,
@@ -95,7 +95,11 @@ class Command:  # pylint: disable=too-many-instance-attributes
                 0,
                 self.target.z,
             )
-            self.local_logger.info(f"CHANGE ALTITUDE: {delta_z:.2f}", True)
+            # self.local_logger.info(f"CHANGE ALTITUDE: {delta_z:.2f}", True)
+
+            # I commentated the above code to fix the logging error, where in the worker log
+            # this would apper 'change altitude: number', which it should not and should only be in main.log (Review)
+
             return f"CHANGE ALTITUDE: {delta_z:.2f}"
 
         dx = self.target.x - telemetry_data.x
@@ -104,7 +108,7 @@ class Command:  # pylint: disable=too-many-instance-attributes
         current_yaw = math.degrees(telemetry_data.yaw)
         yaw_error = (desired_yaw - current_yaw + 180) % 360 - 180
 
-        #Fixed direction issue (Review) 
+        # Fixed direction issue (Review)
         if yaw_error >= 0:
             direction = 1
         else:
@@ -112,13 +116,13 @@ class Command:  # pylint: disable=too-many-instance-attributes
 
         if abs(yaw_error) > 5:
             self.connection.mav.command_long_send(
-                1, #Hardcoded to 1 and 0 as per documentation (Review) 
+                1,  # Hardcoded to 1 and 0 as per documentation (Review)
                 0,
                 mavutil.mavlink.MAV_CMD_CONDITION_YAW,
                 0,
                 abs(yaw_error),
                 5.0,  # turning speed
-                direction,         #Fixed direction issue (Review) 
+                direction,  # Fixed direction issue (Review)
                 1,
                 0,
                 0,

@@ -47,8 +47,10 @@ def command_worker(
     # =============================================================================================
 
     result, cmd = command.Command.create(
-        connection, local_logger
-    )  # removed target before local_logger due to pylint issues
+        connection,
+        target,
+        local_logger,  # turns out I had them in the wrong order which is why pylint was having an issue
+    )  # removed target before local_logger due to pylint issues -> FIXED TARGET IS BACK!!!!! (Review)
     if not result or cmd is None:
         local_logger.error("Failed to create Command", True)
         return
