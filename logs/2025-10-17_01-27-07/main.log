@@ -1,7 +1,7 @@
-20:03:01: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
-20:03:04: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | main | 119] Connected!
-20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 0.334,
+01:27:07: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\common\modules\logger\logger_main_setup.py | setup_main_logger | 62] main logger initialized
+01:27:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | main | 112] Connected!
+01:27:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 333,
             x: 0.0,
             y: 0.0,
             z: 0.0,
@@ -15,8 +15,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 0.666,
+01:27:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 666,
             x: 0.5,
             y: 0.0,
             z: 0.0,
@@ -30,8 +30,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 1.333,
+01:27:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 1334,
             x: 1.0,
             y: 0.0,
             z: 0.0,
@@ -45,8 +45,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:06: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 1.667,
+01:27:10: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 1666,
             x: 1.5,
             y: 0.0,
             z: 0.0,
@@ -60,8 +60,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:07: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 2.333,
+01:27:10: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 2334,
             x: 2.0,
             y: 0.0,
             z: 0.0,
@@ -75,8 +75,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:07: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 2.668,
+01:27:11: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 2667,
             x: 2.5,
             y: 0.0,
             z: 0.0,
@@ -90,8 +90,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 3.334,
+01:27:11: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 3333,
             x: 3.0,
             y: 0.0,
             z: 0.0,
@@ -105,8 +105,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:08: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 3.667,
+01:27:12: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 3668,
             x: 3.5,
             y: 0.0,
             z: 0.0,
@@ -120,8 +120,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 4.334,
+01:27:12: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 4333,
             x: 4.0,
             y: 0.0,
             z: 0.0,
@@ -135,8 +135,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:09: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 4.666,
+01:27:13: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 4667,
             x: 4.5,
             y: 0.0,
             z: 0.0,
@@ -150,8 +150,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:13: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 0.5,
+01:27:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 500,
             x: 0.0,
             y: 0.0,
             z: 0.0,
@@ -165,8 +165,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:14: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 1.0,
+01:27:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 1000,
             x: 0.6666666865348816,
             y: 0.0,
             z: 0.0,
@@ -180,8 +180,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:14: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 1.5,
+01:27:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 1500,
             x: 1.0,
             y: 0.0,
             z: 0.0,
@@ -195,8 +195,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:15: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 2.0,
+01:27:18: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 2000,
             x: 1.6666666269302368,
             y: 0.0,
             z: 0.0,
@@ -210,8 +210,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:15: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 2.5,
+01:27:18: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 2500,
             x: 2.0,
             y: 0.0,
             z: 0.0,
@@ -225,8 +225,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 3.0,
+01:27:19: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 3000,
             x: 2.6666667461395264,
             y: 0.0,
             z: 0.0,
@@ -240,8 +240,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:16: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 3.5,
+01:27:19: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 3500,
             x: 3.0,
             y: 0.0,
             z: 0.0,
@@ -255,8 +255,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 4.0,
+01:27:20: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 4000,
             x: 3.6666667461395264,
             y: 0.0,
             z: 0.0,
@@ -270,8 +270,8 @@
             pitch_speed: 0.0,
             yaw_speed: 3.1415927410125732
         }
-20:03:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 76] Received telemetry data: {
-            time_since_boot: 4.5,
+01:27:21: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\tests\integration\test_telemetry.py | read_queue | 70] Received telemetry data: {
+            time_since_boot: 4500,
             x: 4.0,
             y: 0.0,
             z: 0.0,

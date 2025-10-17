@@ -2,6 +2,8 @@
 Telemetry gathering logic.
 """
 
+import time
+
 from pymavlink import mavutil
 from ..common.modules.logger import logger
 
@@ -94,7 +96,7 @@ class Telemetry:
         assert key is Telemetry.__private_key, "Use create() method"
         self.connection = connection
         self.local_logger = local_logger
-
+        
     def run(self) -> tuple[bool, TelemetryData | None]:
         """
         Receive LOCAL_POSITION_NED and ATTITUDE messages from the drone,
@@ -133,7 +135,6 @@ class Telemetry:
             roll_speed = msg_att.rollspeed
             pitch_speed = msg_att.pitchspeed
             yaw_speed = msg_att.yawspeed
-            time_att = getattr(msg_att, "time_boot_ms", 0) #removed division (Review) 
 
             x = msg_loc.x
             y = msg_loc.y
@@ -141,9 +142,10 @@ class Telemetry:
             x_velocity = msg_loc.vx
             y_velocity = msg_loc.vy
             z_velocity = msg_loc.vz
-            time_loc = getattr(msg_loc, "time_boot_ms", 0) #removed division (Review) 
 
-            latest_time = max(time_att, time_loc)
+            time_att = getattr(msg_att, "time_boot_ms", 0) #Removed Division (Review) 
+            time_loc = getattr(msg_loc, "time_boot_ms", 0) #Removed Division (Review)
+            latest_time = max(time_att, time_loc) #Fixed time_since_boot increment issue (Review)   
 
             telemetry_data = TelemetryData(
                 time_since_boot=latest_time,

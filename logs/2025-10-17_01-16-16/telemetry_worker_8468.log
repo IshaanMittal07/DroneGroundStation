@@ -1,0 +1,3 @@
+01:16:17: [INFO] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 46] Logger initialized
+01:16:17: [ERROR] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry.py | create | 87] Error creating Telemetry: name 'telemetry_queue' is not defined
+01:16:17: [ERROR] [C:\Users\Dell\Documents\AutoBootcamp\autonomy-bootcamp-2025-p2\modules\telemetry\telemetry_worker.py | telemetry_worker | 55] Failed to create Telemetry
