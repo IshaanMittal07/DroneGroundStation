@@ -15,7 +15,6 @@ class HeartbeatReceiver:
     """
 
     __private_key = object()
-    DISCONNECT_THRESHOLD = 5  # max number of missed heartbeats
 
     @classmethod
     def create(
@@ -45,6 +44,9 @@ class HeartbeatReceiver:
         self.local_logger = local_logger
         self.missed_heartbeats = 0  # number of missed heartbeats
         self.status = "Connected"
+        self.DISCONNECT_THRESHOLD = 5  # max number of missed heartbeats
+        #Changed the variable above as an instance variable rather than a global varaible(Review) 
+
 
     def run(self) -> str:
         """

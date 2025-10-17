@@ -64,7 +64,9 @@ def read_queue(
     """
     while not controller.is_exit_requested():
         if not report_queue.queue.empty():
-            report_queue.queue.get()
+            report = report_queue.queue.get()
+            if report:
+                main_logger.info(f"Command Report: {report}", True) #added Logger (Review)
         time.sleep(0.1)
 
 
@@ -80,7 +82,7 @@ def put_queue(
         if controller.is_exit_requested():
             break
         if telemetry_data is None:
-            print("WARNING: Test tried to queue None telemetry data!")
+            local_logger.warning("WARNING: Test tried to queue None telemetry data!") #added Logger (Review) 
             continue
         telemetry_queue.queue.put(telemetry_data)
         time.sleep(TELEMETRY_PERIOD)
@@ -92,13 +94,13 @@ def main() -> int:
     """
     result, config = read_yaml.open_config(logger.CONFIG_FILE_PATH)
     if not result:
-        print("ERROR: Failed to load configuration file")
+        local_logger.error("ERROR: Failed to load configuration file") #added Logger (Review) 
         return -1
 
     assert config is not None
     result, main_logger, _ = logger_main_setup.setup_main_logger(config)
     if not result:
-        print("ERROR: Failed to create main logger")
+        local_logger.error("ERROR: Failed to create main logger")#added Logger (Review) 
         return -1
     assert main_logger is not None
 

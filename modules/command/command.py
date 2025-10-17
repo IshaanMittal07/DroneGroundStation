@@ -83,8 +83,8 @@ class Command:  # pylint: disable=too-many-instance-attributes
         delta_z = self.target.z - telemetry_data.z
         if abs(delta_z) > 0.5:
             self.connection.mav.command_long_send(
-                self.connection.target_system,
-                self.connection.target_component,
+                1, #Hardcoded to 1 and 0 as per documentation (Review) 
+                0,
                 mavutil.mavlink.MAV_CMD_CONDITION_CHANGE_ALT,
                 0,
                 1.0,  # ascent/descent speed
@@ -104,15 +104,21 @@ class Command:  # pylint: disable=too-many-instance-attributes
         current_yaw = math.degrees(telemetry_data.yaw)
         yaw_error = (desired_yaw - current_yaw + 180) % 360 - 180
 
+        #Fixed direction issue (Review) 
+        if yaw_error >= 0:
+            direction = 1
+        else:
+            direction = -1
+
         if abs(yaw_error) > 5:
             self.connection.mav.command_long_send(
-                self.connection.target_system,
-                self.connection.target_component,
+                1, #Hardcoded to 1 and 0 as per documentation (Review) 
+                0,
                 mavutil.mavlink.MAV_CMD_CONDITION_YAW,
                 0,
-                yaw_error,
+                abs(yaw_error),
                 5.0,  # turning speed
-                1,
+                direction,         #Fixed direction issue (Review) 
                 1,
                 0,
                 0,

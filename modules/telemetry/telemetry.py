@@ -100,15 +100,30 @@ class Telemetry:
         Receive LOCAL_POSITION_NED and ATTITUDE messages from the drone,
         combining them together to form a single TelemetryData object.
         """
-        try:
-            msg_loc = self.connection.recv_match(
-                type="LOCAL_POSITION_NED", blocking=True, timeout=1.0
-            )
-            msg_att = self.connection.recv_match(type="ATTITUDE", blocking=True, timeout=1.0)
 
+        #Implemented check to get both LOCAL_POSITION_NED AND ATTITUDE within 1 second (Review) 
+        try:
+            start_time = time.time()
+            msg_loc = msg_att = None
+
+            # Keep trying until both messages are received or 1 second passes
+            while time.time() - start_time < 1.0:
+                if not msg_loc:
+                    msg_loc = self.connection.recv_match(
+                        type="LOCAL_POSITION_NED", blocking=False
+                    )
+                if not msg_att:
+                    msg_att = self.connection.recv_match(
+                        type="ATTITUDE", blocking=False
+                    )
+                if msg_loc and msg_att:
+                    break
+                time.sleep(0.01)
+
+            # Timeout check — didn't get both within 1s
             if not msg_loc or not msg_att:
                 self.local_logger.warning(
-                    "Did not receive both ATTITUDE and LOCAL_POSITION_NED within timeout."
+                    "Did not receive both ATTITUDE and LOCAL_POSITION_NED within 1 second."
                 )
                 return False, None
 
@@ -118,7 +133,7 @@ class Telemetry:
             roll_speed = msg_att.rollspeed
             pitch_speed = msg_att.pitchspeed
             yaw_speed = msg_att.yawspeed
-            time_att = getattr(msg_att, "time_boot_ms", 0) / 1000.0
+            time_att = getattr(msg_att, "time_boot_ms", 0) #removed division (Review) 
 
             x = msg_loc.x
             y = msg_loc.y
@@ -126,7 +141,7 @@ class Telemetry:
             x_velocity = msg_loc.vx
             y_velocity = msg_loc.vy
             z_velocity = msg_loc.vz
-            time_loc = getattr(msg_loc, "time_boot_ms", 0) / 1000.0
+            time_loc = getattr(msg_loc, "time_boot_ms", 0) #removed division (Review) 
 
             latest_time = max(time_att, time_loc)
 

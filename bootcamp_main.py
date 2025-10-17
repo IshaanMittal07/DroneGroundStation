@@ -142,25 +142,26 @@ def main() -> int:
     )
 
     # Create worker managers
-    heartbeat_sender_manager = worker_manager.WorkerManager(
+    #UPDATE: ADDED .create() to each (Review) 
+    heartbeat_sender_manager = worker_manager.WorkerManager.create(
         class_private_create_key=None,
         workers=heartbeat_sender_properties,
         worker_properties=heartbeat_sender_properties,
         local_logger=main_logger,
     )
-    heartbeat_receiver_manager = worker_manager.WorkerManager(
+    heartbeat_receiver_manager = worker_manager.WorkerManager.create(
         class_private_create_key=None,
         workers=heartbeat_receiver_properties,
         worker_properties=heartbeat_receiver_properties,
         local_logger=main_logger,
     )
-    telemetry_manager = worker_manager.WorkerManager(
+    telemetry_manager = worker_manager.WorkerManager.create(
         class_private_create_key=None,
         workers=telemetry_properties,
         worker_properties=telemetry_properties,
         local_logger=main_logger,
     )
-    command_manager = worker_manager.WorkerManager(
+    command_manager = worker_manager.WorkerManager.create(
         class_private_create_key=None,
         workers=command_properties,
         worker_properties=command_properties,
@@ -184,20 +185,18 @@ def main() -> int:
             break
 
         # Read from report queue
+        #UPDATE: MADE INTO ONE TRY/CATCH (Review) 
         try:
             if not report_queue.queue.empty():
                 report = report_queue.queue.get()
                 if report:
                     main_logger.info(f"Command Report: {report}", True)
-        except queue.Empty:
-            pass
 
-        # Read from heartbeat queue
-        try:
             if not heartbeat_queue.queue.empty():
                 hb = heartbeat_queue.queue.get()
                 if hb:
                     main_logger.info(f"Received Heartbeat: {hb}", True)
+
         except queue.Empty:
             pass
 
@@ -208,9 +207,10 @@ def main() -> int:
     main_logger.info("Requested exit")
 
     # Drain queues
-    report_queue.fill_and_drain_queue()
-    telemetry_queue.fill_and_drain_queue()
+    #UPDATE: CHANGED ORDER (Review) 
     heartbeat_queue.fill_and_drain_queue()
+    telemetry_queue.fill_and_drain_queue()
+    report_queue.fill_and_drain_queue()
     main_logger.info("Queues cleared")
 
     # Join worker processes
