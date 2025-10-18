@@ -58,9 +58,6 @@ def telemetry_worker(
 
     local_logger.info("Telemetry Created YAY!", True)
 
-    # Initialize time_since_boot counter
-    time_since_boot = 0
-
     while not controller.is_exit_requested():
         controller.check_pause()
         result, telemetry_data = tele.run()
@@ -70,10 +67,6 @@ def telemetry_worker(
         if not result:
             local_logger.warning("Skipping telemetry send due to timeout or None data.", True)
             continue
-
-        # Fixed issue with time intervals now it incremnts by 500 (Review)
-        time_since_boot = (time_since_boot + 500) % 5000
-        telemetry_data.time_since_boot = time_since_boot
 
         # Send telemetry
         telemetry_queue.queue.put(telemetry_data)
