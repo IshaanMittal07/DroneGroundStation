@@ -150,16 +150,13 @@ class Telemetry:
             z_velocity = msg_loc.vz
             time_loc = getattr(msg_loc, "time_boot_ms", 0)
 
+            # Removed normalize logic (Review)
+
             # Ensure to take most recent timestamp
             latest_time = max(time_att, time_loc)
 
-            # Normalize to get 500 time intervals
-            normalized_time = (latest_time // 500) * 500
-            if normalized_time >= 5000:
-                normalized_time = 0
-
             telemetry_data = TelemetryData(
-                time_since_boot=normalized_time,
+                time_since_boot=latest_time,
                 x=x,
                 y=y,
                 z=z,

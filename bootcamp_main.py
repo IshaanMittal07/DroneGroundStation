@@ -79,25 +79,25 @@ def main() -> int:
 
     mp_manager = mp.Manager()
 
-    # Used .create() for the queues (Review)
-    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper.create(
-        mp_manager=mp_manager,
-        max_size=HEART_MAX,
+    # Removed .create() for the queues (Review)
+    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper(
+        mp_manager,
+        HEART_MAX,
     )
 
-    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper.create(
-        mp_manager=mp_manager,
-        max_size=TELE_MAX,
+    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(
+        mp_manager,
+        TELE_MAX,
     )
 
-    report_queue = queue_proxy_wrapper.QueueProxyWrapper.create(
-        mp_manager=mp_manager,
-        max_size=REPORT_MAX,
+    report_queue = queue_proxy_wrapper.QueueProxyWrapper(
+        mp_manager,
+        REPORT_MAX,
     )
 
     # Worker properties
-    heartbeat_sender_properties = worker_manager.WorkerProperties(
-        class_private_create_key=None,
+    # Added .create() to worker properties (Review)
+    heartbeat_sender_properties = worker_manager.WorkerProperties.create(
         controller=controller,
         count=HEART_SEND_WORKER,
         target=heartbeat_sender_worker.heartbeat_sender_worker,
@@ -107,10 +107,10 @@ def main() -> int:
         },
         input_queues=[],
         output_queues=[],
+        local_logger=main_logger,
     )
 
-    heartbeat_receiver_properties = worker_manager.WorkerProperties(
-        class_private_create_key=None,
+    heartbeat_receiver_properties = worker_manager.WorkerProperties.create(
         controller=controller,
         count=HEART_REC_WORKER,
         target=heartbeat_receiver_worker.heartbeat_receiver_worker,
@@ -121,10 +121,10 @@ def main() -> int:
         },
         input_queues=[],
         output_queues=[heartbeat_queue],
+        local_logger=main_logger,
     )
 
-    telemetry_properties = worker_manager.WorkerProperties(
-        class_private_create_key=None,
+    telemetry_properties = worker_manager.WorkerProperties.create(
         controller=controller,
         count=TELE_WORKER,
         target=telemetry_worker.telemetry_worker,
@@ -135,10 +135,10 @@ def main() -> int:
         },
         input_queues=[],
         output_queues=[telemetry_queue],
+        local_logger=main_logger,
     )
 
-    command_properties = worker_manager.WorkerProperties(
-        class_private_create_key=None,
+    command_properties = worker_manager.WorkerProperties.create(
         controller=controller,
         count=CMD_WORKER,
         target=command_worker.command_worker,
@@ -151,16 +151,18 @@ def main() -> int:
         },
         input_queues=[telemetry_queue],
         output_queues=[report_queue],
+        local_logger=main_logger,
     )
 
     # Create worker managers
     # UPDATE: ADDED .create() to each (Review)
     # UPDATE: ADDED return of tuple of a bool and the object (Review)
+    # UPDATE: Only checks the result boolean and not the instance (Review)
     result, heartbeat_sender_manager = worker_manager.WorkerManager.create(
         worker_properties=heartbeat_sender_properties,
         local_logger=main_logger,
     )
-    if not result or heartbeat_sender_manager is None:
+    if not result:
         main_logger.error("Failed to create HeartbeatSender manager")
         return -1
 
@@ -168,7 +170,7 @@ def main() -> int:
         worker_properties=heartbeat_receiver_properties,
         local_logger=main_logger,
     )
-    if not result or heartbeat_receiver_manager is None:
+    if not result:
         main_logger.error("Failed to create HeartbeatReceiver manager")
         return -1
 
@@ -176,7 +178,7 @@ def main() -> int:
         worker_properties=telemetry_properties,
         local_logger=main_logger,
     )
-    if not result or telemetry_manager is None:
+    if not result:
         main_logger.error("Failed to create Telemetry manager")
         return -1
 
@@ -184,7 +186,7 @@ def main() -> int:
         worker_properties=command_properties,
         local_logger=main_logger,
     )
-    if not result or command_manager is None:
+    if not result:
         main_logger.error("Failed to create Command manager")
         return -1
 

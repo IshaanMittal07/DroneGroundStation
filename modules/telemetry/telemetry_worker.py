@@ -66,7 +66,8 @@ def telemetry_worker(
         result, telemetry_data = tele.run()
 
         # Skip if telemetry failed
-        if not result or telemetry_data is None:
+        # Only checks for the result boolean (Review)
+        if not result:
             local_logger.warning("Skipping telemetry send due to timeout or None data.", True)
             continue
 

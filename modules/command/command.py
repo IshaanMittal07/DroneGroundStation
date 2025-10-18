@@ -62,11 +62,6 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self.velocity_sum = Position(0.0, 0.0, 0.0)
         self.sample_count = 0
 
-    # Removed function (Review)
-    # def set_target(self, target: Position) -> None:
-    #   """Sets the 3D target position for the drone to align to."""
-    #    self.target = target
-
     def run(self, telemetry_data: telemetry.TelemetryData) -> str | None:
         """Make a decision based on received telemetry data."""
         self.velocity_sum.x += telemetry_data.x_velocity or 0

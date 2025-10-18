@@ -95,6 +95,7 @@ def main() -> int:
     """
     result, config = read_yaml.open_config(logger.CONFIG_FILE_PATH)
     if not result:
+        print("ERROR: Failed to load configuration file")
         return -1
 
     assert config is not None
