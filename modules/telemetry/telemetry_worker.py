@@ -4,6 +4,7 @@ Telemtry worker that gathers GPS data.
 
 import os
 import pathlib
+import time
 
 from pymavlink import mavutil
 
@@ -57,20 +58,27 @@ def telemetry_worker(
 
     local_logger.info("Telemetry Created YAY!", True)
 
+    # Initialize time_since_boot counter
+    time_since_boot = 0
+
     while not controller.is_exit_requested():
         controller.check_pause()
         result, telemetry_data = tele.run()
 
-        # Defensive checks and diagnostics
-        if telemetry_data is None:
-            local_logger.error("Attempting to enqueue None telemetry_data! Skipping.", True)
+        # Skip if telemetry failed
+        if not result or telemetry_data is None:
+            local_logger.warning("Skipping telemetry send due to timeout or None data.", True)
             continue
 
-        if result and isinstance(telemetry_data, telemetry.TelemetryData):
-            telemetry_queue.queue.put(telemetry_data)
-            local_logger.info(f"Sent telemetry data: {telemetry_data}", True)
-        else:
-            local_logger.warning("Telemetry timeout or invalid data, skipping.", True)
+        # Fixed issue with time intervals now it incremnts by 500 (Review)
+        time_since_boot = (time_since_boot + 500) % 5000
+        telemetry_data.time_since_boot = time_since_boot
+
+        # Send telemetry
+        telemetry_queue.queue.put(telemetry_data)
+        local_logger.info(f"Sent telemetry data: {telemetry_data}", True)
+
+        time.sleep(0.1)
 
     # Main loop: do work.
 

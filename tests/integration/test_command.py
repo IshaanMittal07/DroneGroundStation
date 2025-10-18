@@ -100,7 +100,7 @@ def main() -> int:
     assert config is not None
     result, main_logger, _ = logger_main_setup.setup_main_logger(config)
     if not result:
-        main_logger.error("ERROR: Failed to create main logger")  # added Logger (Review)
+        print("ERROR: Failed to create main logger")  # Made it back to print (Review)
         return -1
     assert main_logger is not None
 

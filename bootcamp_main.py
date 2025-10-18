@@ -79,9 +79,21 @@ def main() -> int:
 
     mp_manager = mp.Manager()
 
-    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, HEART_MAX)
-    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, TELE_MAX)
-    report_queue = queue_proxy_wrapper.QueueProxyWrapper(mp_manager, REPORT_MAX)
+    # Used .create() for the queues (Review)
+    heartbeat_queue = queue_proxy_wrapper.QueueProxyWrapper.create(
+        mp_manager=mp_manager,
+        max_size=HEART_MAX,
+    )
+
+    telemetry_queue = queue_proxy_wrapper.QueueProxyWrapper.create(
+        mp_manager=mp_manager,
+        max_size=TELE_MAX,
+    )
+
+    report_queue = queue_proxy_wrapper.QueueProxyWrapper.create(
+        mp_manager=mp_manager,
+        max_size=REPORT_MAX,
+    )
 
     # Worker properties
     heartbeat_sender_properties = worker_manager.WorkerProperties(
@@ -143,22 +155,38 @@ def main() -> int:
 
     # Create worker managers
     # UPDATE: ADDED .create() to each (Review)
-    heartbeat_sender_manager = worker_manager.WorkerManager.create(
+    # UPDATE: ADDED return of tuple of a bool and the object (Review)
+    result, heartbeat_sender_manager = worker_manager.WorkerManager.create(
         worker_properties=heartbeat_sender_properties,
         local_logger=main_logger,
     )
-    heartbeat_receiver_manager = worker_manager.WorkerManager.create(
+    if not result or heartbeat_sender_manager is None:
+        main_logger.error("Failed to create HeartbeatSender manager")
+        return -1
+
+    result, heartbeat_receiver_manager = worker_manager.WorkerManager.create(
         worker_properties=heartbeat_receiver_properties,
         local_logger=main_logger,
     )
-    telemetry_manager = worker_manager.WorkerManager.create(
+    if not result or heartbeat_receiver_manager is None:
+        main_logger.error("Failed to create HeartbeatReceiver manager")
+        return -1
+
+    result, telemetry_manager = worker_manager.WorkerManager.create(
         worker_properties=telemetry_properties,
         local_logger=main_logger,
     )
-    command_manager = worker_manager.WorkerManager.create(
+    if not result or telemetry_manager is None:
+        main_logger.error("Failed to create Telemetry manager")
+        return -1
+
+    result, command_manager = worker_manager.WorkerManager.create(
         worker_properties=command_properties,
         local_logger=main_logger,
     )
+    if not result or command_manager is None:
+        main_logger.error("Failed to create Command manager")
+        return -1
 
     # Start all workers
     heartbeat_sender_manager.start_workers()
@@ -170,25 +198,27 @@ def main() -> int:
 
     # Main's work: read from all queues that output to main, and log any commands that we make
     # Continue running for 100 seconds or until the drone disconnects
+    # Fixed logic to check if drone is disconnected (Review)
     start_time = time.time()
     while (time.time() - start_time) < RUNTIME:
-        if not connection.port or connection.port.closed:
-            main_logger.warning("Drone disconnected!", True)
-            break
+        # Read heartbeat updates
+        try:
+            if not heartbeat_queue.queue.empty():
+                hb_status = heartbeat_queue.queue.get_nowait()
+                main_logger.info(f"Heartbeat status: {hb_status}", True)
 
-        # Read from report queue
-        # UPDATE: MADE INTO ONE TRY/CATCH (Review)
+                if hb_status == "Disconnected":
+                    main_logger.warning("Drone disconnected, exiting", True)
+                    controller.request_exit()  # Early termination "calling an exit" (Review)
+                    break
+        except queue.Empty:
+            pass
+
+        # Read command reports
         try:
             if not report_queue.queue.empty():
-                report = report_queue.queue.get()
-                if report:
-                    main_logger.info(f"Command Report: {report}", True)
-
-            if not heartbeat_queue.queue.empty():
-                hb = heartbeat_queue.queue.get()
-                if hb:
-                    main_logger.info(f"Received Heartbeat: {hb}", True)
-
+                report = report_queue.queue.get_nowait()
+                main_logger.info(f"Command report: {report}", True)
         except queue.Empty:
             pass
 

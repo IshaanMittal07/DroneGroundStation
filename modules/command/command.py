@@ -62,9 +62,10 @@ class Command:  # pylint: disable=too-many-instance-attributes
         self.velocity_sum = Position(0.0, 0.0, 0.0)
         self.sample_count = 0
 
-    def set_target(self, target: Position) -> None:
-        """Sets the 3D target position for the drone to align to."""
-        self.target = target
+    # Removed function (Review)
+    # def set_target(self, target: Position) -> None:
+    #   """Sets the 3D target position for the drone to align to."""
+    #    self.target = target
 
     def run(self, telemetry_data: telemetry.TelemetryData) -> str | None:
         """Make a decision based on received telemetry data."""
@@ -108,11 +109,11 @@ class Command:  # pylint: disable=too-many-instance-attributes
         current_yaw = math.degrees(telemetry_data.yaw)
         yaw_error = (desired_yaw - current_yaw + 180) % 360 - 180
 
-        # Fixed direction issue (Review)
+        # Fixed direction issue + flipped logic (Review)
         if yaw_error >= 0:
-            direction = 1
-        else:
             direction = -1
+        else:
+            direction = 1
 
         if abs(yaw_error) > 5:
             self.connection.mav.command_long_send(

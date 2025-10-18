@@ -104,33 +104,43 @@ class Telemetry:
         """
 
         # Implemented check to get both LOCAL_POSITION_NED AND ATTITUDE within 1 second (Review)
+        # Fixed issue with time intervals now it incremnts by 500 (Review)
         try:
             start_time = time.time()
-            msg_loc = msg_att = None
+            msg_loc = None
+            msg_att = None
 
-            # Keep trying until both messages are received or 1 second passes
+            # Wait up to 1 second for both messages
             while time.time() - start_time < 1.0:
-                if not msg_loc:
-                    msg_loc = self.connection.recv_match(type="LOCAL_POSITION_NED", blocking=False)
-                if not msg_att:
-                    msg_att = self.connection.recv_match(type="ATTITUDE", blocking=False)
+                msg = self.connection.recv_match(blocking=False)
+                if not msg:
+                    continue
+
+                msg_type = msg.get_type()
+                if msg_type == "LOCAL_POSITION_NED":
+                    msg_loc = msg
+                elif msg_type == "ATTITUDE":
+                    msg_att = msg
+
+                # Once both are received, break early
                 if msg_loc and msg_att:
                     break
-                time.sleep(0.01)
 
-            # Timeout check — didn't get both within 1s
+            # If one is missing, log and exit
             if not msg_loc or not msg_att:
                 self.local_logger.warning(
                     "Did not receive both ATTITUDE and LOCAL_POSITION_NED within 1 second."
                 )
                 return False, None
 
+            # Extract telemetry data
             roll = msg_att.roll
             pitch = msg_att.pitch
             yaw = msg_att.yaw
             roll_speed = msg_att.rollspeed
             pitch_speed = msg_att.pitchspeed
             yaw_speed = msg_att.yawspeed
+            time_att = getattr(msg_att, "time_boot_ms", 0)
 
             x = msg_loc.x
             y = msg_loc.y
@@ -138,13 +148,18 @@ class Telemetry:
             x_velocity = msg_loc.vx
             y_velocity = msg_loc.vy
             z_velocity = msg_loc.vz
+            time_loc = getattr(msg_loc, "time_boot_ms", 0)
 
-            time_att = getattr(msg_att, "time_boot_ms", 0)  # Removed Division (Review)
-            time_loc = getattr(msg_loc, "time_boot_ms", 0)  # Removed Division (Review)
-            latest_time = max(time_att, time_loc)  # Fixed time_since_boot increment issue (Review)
+            # Ensure to take most recent timestamp
+            latest_time = max(time_att, time_loc)
+
+            # Normalize to get 500 time intervals
+            normalized_time = (latest_time // 500) * 500
+            if normalized_time >= 5000:
+                normalized_time = 0
 
             telemetry_data = TelemetryData(
-                time_since_boot=latest_time,
+                time_since_boot=normalized_time,
                 x=x,
                 y=y,
                 z=z,

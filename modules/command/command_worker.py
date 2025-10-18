@@ -55,7 +55,7 @@ def command_worker(
         local_logger.error("Failed to create Command", True)
         return
 
-    cmd.set_target(target)
+    # cmd.set_target(target) (Review)
     local_logger.info("Command Created YAY!", True)
 
     while not controller.is_exit_requested():
