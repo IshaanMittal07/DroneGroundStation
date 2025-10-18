@@ -242,6 +242,7 @@ def main() -> int:
                 if hb_status == "Disconnected":
                     main_logger.warning("Drone disconnected, exiting", True)
                     controller.request_exit()  # Early termination "calling an exit" (Review)
+                    controller.clear_exit()  # "Calling an exit" (Review)
                     break
         except queue.Empty:
             pass
