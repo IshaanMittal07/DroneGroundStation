@@ -267,7 +267,7 @@ def main() -> int:
     heartbeat_sender_manager.join_workers()
 
     main_logger.info("Stopped")
-    controller.clear_exit() # added exit (Review)
+    controller.clear_exit()  # added exit (Review)
 
     # =============================================================================================
     #                          ↑ BOOTCAMPERS MODIFY ABOVE THIS COMMENT ↑
