@@ -225,10 +225,12 @@ def main() -> int:
     # Main's work: read from all queues that output to main, and log any commands that we make
     # Continue running for 100 seconds or until the drone disconnects
     # Fixed logic to check if drone is disconnected (Review)
+    # Put the two try/except blocks into one (Review)
     start_time = time.time()
     while (time.time() - start_time) < RUNTIME:
         # Read heartbeat updates
         try:
+            # Read heartbeat queue
             if not heartbeat_queue.queue.empty():
                 hb_status = heartbeat_queue.queue.get_nowait()
                 main_logger.info(f"Heartbeat status: {hb_status}", True)
@@ -236,14 +238,12 @@ def main() -> int:
                 if hb_status == "Disconnected":
                     main_logger.warning("Drone disconnected, exiting", True)
                     break
-        except queue.Empty:
-            pass
 
-        # Read command reports
-        try:
+            # Read command reports
             if not report_queue.queue.empty():
                 report = report_queue.queue.get_nowait()
                 main_logger.info(f"Command report: {report}", True)
+
         except queue.Empty:
             pass
 
